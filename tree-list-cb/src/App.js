@@ -11,146 +11,162 @@ class App extends Component {
       justifyContent: "space-around",
       paddingTop: "20px"
     }
-
     
     const chapter = [
       {
-              id: 1,
-              name: "1",
-              description: "Описание темы 1",
-              isOpened:false,
-              // src: require("./right.png"),
-              parId: 0,
-          },
-          {
-              id: 2,
-              name: "1.1",
-              description: "Описание подтемы 1",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 1,
-          },
-        {
-              id: 5,
-              name: "1.1.1",
-              description: "Описание подтемы 1",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 2,
-            },
-            {
-              id: 6,
-              name: "1.1.2",
-              description: "Описание подтемы 2",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 2,
-            },
-            {
-              id: 7,
-              name: "1.1.3",
-              description: "Описание подтемы 3",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 2,
-            },
-          {
-              id: 3,
-              name: "1.2",
-              description: "Описание подтемы 2",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 1,
-          },
-          {
-            id: 8,
-            name: "1.2.1",
-              description: "Описание подтемы 1",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 3,
-          },
-          {
-            id: 9,
-            name: "1.2.2",
-              description: "Описание подтемы 2",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 3,
-            },
-          {
-            id: 10,
-            name: "1.2.3",
-              description: "Описание подтемы 3",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 3,
-          },
-          {
-              id: 4,
-              name: "1.3",
-              description: "Описание подтемы 3",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 1,
-          },
-          {
-            id: 11,
-            name: "1.3.1",
-              description: "Описание подтемы 1",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 4,
-            },
-        {
-          id: 20,
-          name: "1.3.1.1",
-          description: "hrhrh",
-          isOpened:false,
-          // src: require('./right.png'),
-          parId: 11,
-        },
-      {
-        id: 21,
-          name: "1.3.1.1.1",
-          description: "hrhrh",
-          isOpened:false,
-          // src: require('./right.png'),
-          parId: 20,
-      },
-          {
-        id: 12,
-        name: "1.3.2",
-        description: "Описание подтемы 2",
+        id: 1,
+        name: "1",
+        description: "Описание темы 1",
         isOpened:false,
-        // src: require('./right.png'),
-        parId: 4,
-      },
+        // src: require("./right.png"),
+        parId: 0,
+        childs: [
           {
-            id: 13,
-            name: "1.3.3",
-              description: "Описание подтемы 3",
-              isOpened:false,
-              // src: require('./right.png'),
-              parId: 4,
-          },
-          {
-            id: 14,
-            name: "2",
-            description: "Описание темы 2",
+            id: 2,
+            name: "1.1",
+            description: "Описание подтемы 1",
             isOpened:false,
             // src: require('./right.png'),
-            parId: 0,
+            parId: 1,
+            childs: [
+             {
+                id: 5,
+                name: "1.1.1",
+                description: "Описание подтемы 1",
+                isOpened:false,
+                // src: require('./right.png'),
+                parId: 2,
+                childs: []
+              },
+              {
+                id: 6,
+                name: "1.1.2",
+                description: "Описание подтемы 2",
+                isOpened:false,
+                // src: require('./right.png'),
+                parId: 2,
+                childs: []
+              },
+              {
+                id: 7,
+                name: "1.1.3",
+                description: "Описание подтемы 3",
+                isOpened:false,
+                // src: require('./right.png'),
+                parId: 2,
+                childs: []
+              },
+            ]
           },
-      ]
-    
-    // this.getArray = this.getArray.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
-    // this.changeStringTit = this.changeStringTit.bind(this);
-    // this.changeStringDesc = this.changeStringDesc.bind(this);
+          {
+            id: 3,
+            name: "1.2",
+            description: "Описание подтемы 2",
+            isOpened:false,
+            // src: require('./right.png'),
+            parId: 1,
+            childs: [
+              {
+                id: 8,
+                name: "1.2.1",
+                  description: "Описание подтемы 1",
+                  isOpened:false,
+                  // src: require('./right.png'),
+                  parId: 3,
+                  childs: []
+              },
+              {
+                id: 9,
+                name: "1.2.2",
+                description: "Описание подтемы 2",
+                isOpened:false,
+                // src: require('./right.png'),
+                parId: 3,
+                childs: []
+              },
+              {
+                id: 10,
+                name: "1.2.3",
+                  description: "Описание подтемы 3",
+                  isOpened:false,
+                  // src: require('./right.png'),
+                  parId: 3,
+                  childs: []
+              },
+            ]
+          },
+          {
+            id: 4,
+            name: "1.3",
+            description: "Описание подтемы 3",
+            isOpened:false,
+            // src: require('./right.png'),
+            parId: 1,
+            childs: [
+              {
+                id: 11,
+                name: "1.3.1",
+                description: "Описание подтемы 1",
+                isOpened:false,
+                // src: require('./right.png'),
+                parId: 4,
+                childs: [
+                  {
+                    id: 20,
+                    name: "1.3.1.1",
+                    description: "hrhrh",
+                    isOpened:false,
+                    // src: require('./right.png'),
+                    parId: 11,
+                    childs: [
+                      {
+                        id: 21,
+                        name: "1.3.1.1.1",
+                        description: "hrhrh",
+                        isOpened:false,
+                        // src: require('./right.png'),
+                        parId: 20,
+                        childs: []
+                      },
+                    ]
+                  },
+                ]
+              },
+              {
+                id: 12,
+                name: "1.3.2",
+                description: "Описание подтемы 2",
+                isOpened:false,
+                // src: require('./right.png'),
+                parId: 4,
+                childs: []
+              },
+              {
+                id: 13,
+                name: "1.3.3",
+                  description: "Описание подтемы 3",
+                  isOpened:false,
+                  // src: require('./right.png'),
+                  parId: 4,
+                  childs: []
+              },
+            ]
+          },
+        ]
+      },
+    {
+      id: 14,
+      name: "2",
+      description: "Описание темы 2",
+      isOpened:false,
+      // src: require('./right.png'),
+      parId: 0,
+      childs: []
+    },
+  ]
     return (
       <div style={{...style}}>
-        <Container id={1} list={chapter} />
+        <Container id={0} list={chapter} />
       </div>
     );
   }

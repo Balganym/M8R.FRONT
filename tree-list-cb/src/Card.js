@@ -2,25 +2,30 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
+import Container from './Container';
 
 const style = {
-	border: '1px dashed gray',
-	padding: '0.5rem 1rem',
-	margin: '.5rem',
-	backgroundColor: 'white',
-	cursor: 'move'
+	marginLeft: '40px',
 };
 
 class Card extends Component {
+	show() {
+		const { card } = this.props;
+		if(card.isOpened === true){
+			return (<Container id={card.parId + 2} list={card.childs} />)
+		}
+	}
 
 	render() {
 		const { card, isDragging, connectDragSource, connectDropTarget } = this.props;
-		const opacity = isDragging ? 0.5 : 1;
-
+		const opacity = isDragging ? 0.1 : 1;
 		return connectDragSource(connectDropTarget(
 			<div style={{ ...style, opacity }}>
-				<h3>{card.name}</h3>
+				<h3 onClick={() => this.props.onClick(card.id)}>{card.name}</h3>
 				<p>{card.description}</p>
+				<hr/>
+				{this.show(card)}
+				{/*<Container id={card.parId + 2} list={card.childs} />*/}
 			</div>
 		));
 	}
@@ -39,10 +44,9 @@ const cardSource = {
 	endDrag(props, monitor) {
 		const item = monitor.getItem();
 		const dropResult = monitor.getDropResult();	
-
-		if ( dropResult && dropResult.listId !== item.listId ) {
-			props.removeCard(item.index);
-		}
+		// if ( dropResult && dropResult.listId !== item.listId ) {
+		// 	props.removeCard(item.index);
+		// }
 	}
 };
 
