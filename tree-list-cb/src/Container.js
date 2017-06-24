@@ -9,15 +9,6 @@ class Container extends Component {
 	constructor(props) {
 		super(props);		
 		this.state = { chapter: props.list };
-		// console.log(this.state)
-	}
-
-	pushCard(card) {
-		this.setState(update(this.state, {
-			chapter: {
-				$push: [ card ]
-			}
-		}));
 	}
 
 	removeCard(index) {		
@@ -48,13 +39,13 @@ class Container extends Component {
 		let n = this.state.chapter.find(l => l.id === e);
 		let tree2 = this.state.chapter.slice();
 		n.isOpened = !n.isOpened;
+		(n.isOpened ? n.src=require('./down.png') : n.src=require('./right.png'))
 		tree2.map(leaf => (
 			leaf.id === e ? n : leaf
 		))
 		this.setState({
 			chapter: tree2,
 		})
-		console.log(e);
 	}
 
 	render() {
@@ -92,8 +83,6 @@ class Container extends Component {
 const cardTarget = {
 	drop(props, monitor, component ) {
 		const { id } = props;
-		const sourceObj = monitor.getItem();		
-		// if ( id !== sourceObj.listId ) component.pushCard(sourceObj.card);
 		return {
 			listId: id
 		};

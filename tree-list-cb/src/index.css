@@ -1,9 +1,37 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+*{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
 }
-
+input{
+	border: none;
+	font-size: 20px;
+}
+.title{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	cursor: pointer;
+}
+.name{
+	margin-top: 2px;
+}
+.description{
+	font-size: 10px;
+	margin-left: 22px;
+	margin-top: 5px;
+	margin: 5px 0 5px 22px;
+}
+.arrows{
+	width: 12px;
+	margin-right: 10px;
+}
+.descInput{
+	border: none;e
+	font-size: 10px;
+	height: 20px;
+	margin-left: 10px;
+}
 .fade-enter {
     opacity: 0;
     transform:   translate(50px,0);

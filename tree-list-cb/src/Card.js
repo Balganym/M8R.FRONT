@@ -7,12 +7,13 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const style = {
 	marginLeft: '40px',
+	cursor: 'move'
 };
 
 class Card extends Component {
 	show() {
 		const { card } = this.props;
-		if(card.isOpened === true){
+		if(card.isOpened){
 			return (<Container id={card.parId + 2} list={card.childs} />)
 		}
 	}
@@ -26,21 +27,22 @@ class Card extends Component {
 		const { card, isDragging, connectDragSource, connectDropTarget } = this.props;
 		const opacity = isDragging ? 0.1 : 1;
 		return connectDragSource(connectDropTarget(
-				<div style={{ ...style, opacity }}>
-					<ReactCSSTransitionGroup {...transitionOptions}>
-						<h3 onClick={() => this.props.onClick(card.id)}>{card.name}</h3>
-						<p>{card.description}</p>
-						<hr/>
-						{this.show(card)}
-					</ReactCSSTransitionGroup>
-					{/*<Container id={card.parId + 2} list={card.childs} />*/}
-				</div>
+			<div style={{ ...style, opacity }}>
+				<ReactCSSTransitionGroup {...transitionOptions}>
+					<div className="title" onClick={() => this.props.onClick(card.id)}>
+						<img className="arrows" src={card.src} />
+						<h4 className="name">{card.name}</h4>
+					</div>
+					<p className="description">{card.description}</p>
+					<hr/>
+					{this.show(card)}
+				</ReactCSSTransitionGroup>
+			</div>
 		));
 	}
 }
 
 const cardSource = {
-
 	beginDrag(props) {		
 		return {			
 			index: props.index,
@@ -48,14 +50,6 @@ const cardSource = {
 			card: props.card
 		};
 	},
-
-	endDrag(props, monitor) {
-		const item = monitor.getItem();
-		const dropResult = monitor.getDropResult();	
-		// if ( dropResult && dropResult.listId !== item.listId ) {
-		// 	props.removeCard(item.index);
-		// }
-	}
 };
 
 const cardTarget = {
@@ -82,10 +76,6 @@ const cardTarget = {
 		// Get pixels to the top
 		const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
-		// Only perform the move when the mouse has crossed half of the items height
-		// When dragging downwards, only move when the cursor is below 50%
-		// When dragging upwards, only move when the cursor is above 50%
-
 		// Dragging downwards
 		if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
 			return;
@@ -99,11 +89,6 @@ const cardTarget = {
 		// Time to actually perform the action
 		if ( props.listId === sourceListId ) {
 			props.moveCard(dragIndex, hoverIndex);
-
-			// Note: we're mutating the monitor item here!
-			// Generally it's better to avoid mutations,
-			// but it's good here for the sake of performance
-			// to avoid expensive index searches.
 			monitor.getItem().index = hoverIndex;
 		}		
 	}
