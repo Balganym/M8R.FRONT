@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import update from 'react/lib/update';
 import Card from './Card';
 import { DropTarget } from 'react-dnd';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Container extends Component {
 

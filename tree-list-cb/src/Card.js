@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import Container from './Container';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const style = {
 	marginLeft: '40px',
@@ -17,16 +18,23 @@ class Card extends Component {
 	}
 
 	render() {
+		const transitionOptions = {
+			transitionName: "fade",
+			transitionEnterTimeout: 500,
+			transitionLeaveTimeout: 400
+		};
 		const { card, isDragging, connectDragSource, connectDropTarget } = this.props;
 		const opacity = isDragging ? 0.1 : 1;
 		return connectDragSource(connectDropTarget(
-			<div style={{ ...style, opacity }}>
-				<h3 onClick={() => this.props.onClick(card.id)}>{card.name}</h3>
-				<p>{card.description}</p>
-				<hr/>
-				{this.show(card)}
-				{/*<Container id={card.parId + 2} list={card.childs} />*/}
-			</div>
+				<div style={{ ...style, opacity }}>
+					<ReactCSSTransitionGroup {...transitionOptions}>
+						<h3 onClick={() => this.props.onClick(card.id)}>{card.name}</h3>
+						<p>{card.description}</p>
+						<hr/>
+						{this.show(card)}
+					</ReactCSSTransitionGroup>
+					{/*<Container id={card.parId + 2} list={card.childs} />*/}
+				</div>
 		));
 	}
 }
