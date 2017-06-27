@@ -4,11 +4,14 @@ import Card from './Card';
 import { DropTarget } from 'react-dnd';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-class Container extends Component {
+const parsedState = [];
 
+class Container extends Component {
 	constructor(props) {
-		super(props);		
-		this.state = { chapter: props.list };
+		super(props);
+		this.state = {
+			chapter: this.props.list, 
+		};
 	}
 
 	removeCard(index) {		
@@ -58,26 +61,24 @@ class Container extends Component {
 
 		return connectDropTarget(
 			<div style={{...style}}>
-				{
-					chapter.map((card, i) => {
-
-						return (
-							<Card 
-								key={card.id}
-								index={i}
-								listId={this.props.id}
-								card={card}														
-								removeCard={this.removeCard.bind(this)}
-								moveCard={this.moveCard.bind(this)}
-								onClick={this.handleClick.bind(this)}
-							/>
-						);
-
-					})
-				}
+			{
+				chapter.map((card, i) => {
+					return (
+						<Card 
+							key={card.id}
+							index={i}
+							listId={this.props.id}
+							card={card}														
+							removeCard={this.removeCard.bind(this)}
+							moveCard={this.moveCard.bind(this)}
+							onClick={this.handleClick.bind(this)}
+						/>
+					);
+				})
+			}
 			</div>
 		);
-  }
+	}
 }
 
 const cardTarget = {

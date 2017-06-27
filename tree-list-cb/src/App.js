@@ -3,170 +3,142 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Container from './Container';
 
+const st = [
+  {
+    id: 1,
+    name: "1",
+    description: "Описание темы 1",
+    parId: 0,
+  },
+  {
+    id: 2,
+    name: "1.1",
+    description: "Описание подтемы 1",
+    parId: 1,
+  },
+  {
+    id: 5,
+    name: "1.1.1",
+    description: "Описание подтемы 1",
+    parId: 2,
+  },
+  {
+    id: 6,
+    name: "1.1.2",
+    description: "Описание подтемы 2",
+    parId: 2,
+  },
+  {
+    id: 7,
+    name: "1.1.3",
+    description: "Описание подтемы 3",
+    parId: 2,
+  },
+  {
+    id: 3,
+    name: "1.2",
+    description: "Описание подтемы 2",
+    parId: 1,
+  },
+  {
+    id: 8,
+    name: "1.2.1",
+    description: "Описание подтемы 1",
+    parId: 3,
+  },
+  {
+    id: 9,
+    name: "1.2.2",
+    description: "Описание подтемы 2",
+    parId: 3,
+  },
+  {
+    id: 10,
+    name: "1.2.3",
+    description: "Описание подтемы 3",
+    parId: 3,
+  },
+  {
+    id: 4,
+    name: "1.3",
+    description: "Описание подтемы 3",
+    parId: 1,
+  },
+  {
+    id: 11,
+    name: "1.3.1",
+    description: "Описание подтемы 1",
+    parId: 4,
+  },
+  {
+    id: 20,
+    name: "1.3.1.1",
+    description: "hrhrh",
+    parId: 11,
+  },
+  {
+    id: 21,
+    name: "1.3.1.1.1",
+    description: "hrhrh",
+    parId: 20,
+  },
+  {
+    id: 12,
+    name: "1.3.2",
+    description: "Описание подтемы 2",
+    parId: 4,
+  },
+  {
+    id: 13,
+    name: "1.3.3",
+    description: "Описание подтемы 3",
+    parId: 4,
+  },
+  {
+    id: 14,
+    name: "2",
+    description: "Описание темы 2",
+    parId: 0,
+  },
+];
+
+
+var parsedSt = [];
+
 class App extends Component {
+  parser(ind) {
+    const childs = [];
+    st.map(l => {
+      if(l.parId === ind) {
+        console.log(l.id);
+        var c = this.parser(l.id);
+        childs.push({
+          id: l.id,
+          name: l.name, 
+          description: l.description,
+          parId: ind,
+          isOpened: false,
+          src: require("./right.png"),
+          childs: c,
+        })
+      }
+    })
+    let obj = st.find(l => l.id === ind);
+    console.log(childs);
+    return childs;
+  }
 
   render() {
+    parsedSt = this.parser(0);
     const style = {
       display: "flex",
       justifyContent: "space-around",
       paddingTop: "20px"
     }
-    
-    const chapter = [
-      {
-        id: 1,
-        name: "Тема 1",
-        description: "Описание темы 1",
-        isOpened:false,
-        src: require("./right.png"),
-        parId: 0,
-        childs: [
-          {
-            id: 2,
-            name: "Тема 1.1",
-            description: "Описание подтемы 1",
-            isOpened:false,
-            src: require('./right.png'),
-            parId: 1,
-            childs: [
-             {
-                id: 5,
-                name: "Тема 1.1.1",
-                description: "Описание подтемы 1",
-                isOpened:false,
-                src: require('./right.png'),
-                parId: 2,
-                childs: []
-              },
-              {
-                id: 6,
-                name: "Тема 1.1.2",
-                description: "Описание подтемы 2",
-                isOpened:false,
-                src: require('./right.png'),
-                parId: 2,
-                childs: []
-              },
-              {
-                id: 7,
-                name: "Тема 1.1.3",
-                description: "Описание подтемы 3",
-                isOpened:false,
-                src: require('./right.png'),
-                parId: 2,
-                childs: []
-              },
-            ]
-          },
-          {
-            id: 3,
-            name: "Тема 1.2",
-            description: "Описание подтемы 2",
-            isOpened:false,
-            src: require('./right.png'),
-            parId: 1,
-            childs: [
-              {
-                id: 8,
-                name: "Тема 1.2.1",
-                  description: "Описание подтемы 1",
-                  isOpened:false,
-                  src: require('./right.png'),
-                  parId: 3,
-                  childs: []
-              },
-              {
-                id: 9,
-                name: "Тема 1.2.2",
-                description: "Описание подтемы 2",
-                isOpened:false,
-                src: require('./right.png'),
-                parId: 3,
-                childs: []
-              },
-              {
-                id: 10,
-                name: "Тема 1.2.3",
-                  description: "Описание подтемы 3",
-                  isOpened:false,
-                  src: require('./right.png'),
-                  parId: 3,
-                  childs: []
-              },
-            ]
-          },
-          {
-            id: 4,
-            name: "Тема 1.3",
-            description: "Описание подтемы 3",
-            isOpened:false,
-            src: require('./right.png'),
-            parId: 1,
-            childs: [
-              {
-                id: 11,
-                name: "Тема 1.3.1",
-                description: "Описание подтемы 1",
-                isOpened:false,
-                src: require('./right.png'),
-                parId: 4,
-                childs: [
-                  {
-                    id: 20,
-                    name: "Тема 1.3.1.1",
-                    description: "hrhrh",
-                    isOpened:false,
-                    src: require('./right.png'),
-                    parId: 11,
-                    childs: [
-                      {
-                        id: 21,
-                        name: "Тема 1.3.1.1.1",
-                        description: "hrhrh",
-                        isOpened:false,
-                        src: require('./right.png'),
-                        parId: 20,
-                        childs: []
-                      },
-                    ]
-                  },
-                ]
-              },
-              {
-                id: 12,
-                name: "Тема 1.3.2",
-                description: "Описание подтемы 2",
-                isOpened:false,
-                src: require('./right.png'),
-                parId: 4,
-                childs: []
-              },
-              {
-                id: 13,
-                name: "Тема 1.3.3",
-                  description: "Описание подтемы 3",
-                  isOpened:false,
-                  src: require('./right.png'),
-                  parId: 4,
-                  childs: []
-              },
-            ]
-          },
-        ]
-      },
-    {
-      id: 14,
-      name: "Тема 2",
-      description: "Описание темы 2",
-      isOpened:false,
-      src: require('./right.png'),
-      parId: 0,
-      childs: []
-    },
-  ]
+
     return (
       <div style={{...style}}>
-        <Container id={0} list={chapter} />
+        <Container id={0} list={parsedSt} />
       </div>
     );
   }
